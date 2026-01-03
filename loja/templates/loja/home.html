@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Alpes Uniformes</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'loja/assets/favicon.ico' %}" />
+
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- CSS do template -->
+    <link href="{% static 'loja/css/styles.css' %}" rel="stylesheet" />
+
+    <!-- WhatsApp flutuante -->
+    <link rel="stylesheet" href="{% static 'loja/css/whatsapp-float.css' %}">
+
+    <style>
+        /* Ajuste do banner/carrossel */
+        .banner-img {
+            width: 100%;
+            height: 420px;          /* pode mudar para 380/500 se quiser */
+            object-fit: cover;      /* mantém bonito sem distorcer */
+        }
+        @media (max-width: 768px) {
+            .banner-img { height: 280px; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#">Alpes Uniformes</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#produtos">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://wa.me/551120791922" target="_blank">WhatsApp</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    <i class="bi-telephone me-2"></i><span class="me-3">(11) 2079-1922</span>
+                    <i class="bi-envelope me-2"></i><span>alpes@alpesuniformes.com.br</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner / Carousel -->
+    <header>
+        <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4500">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'loja/assets/logo-banner-1.png' %}" class="d-block banner-img" alt="Alpes Uniformes - Banner 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'loja/assets/logo-banner-2.png' %}" class="d-block banner-img" alt="Alpes Uniformes - Banner 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'loja/assets/logo-banner-3.png' %}" class="d-block banner-img" alt="Alpes Uniformes - Banner 3">
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Products -->
+    <section class="py-5" id="produtos">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                {% for produto in produtos %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+
+                        {% if produto.foto %}
+                            <img src="{{ produto.foto.url }}" class="card-img-top" alt="{{ produto.nome }}" style="height: 220px; object-fit: cover;">
+                        {% endif %}
+
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">{{ produto.nome }}</h5>
+
+                                <div class="text-muted small">
+                                    Categoria: {{ produto.categoria.nome }}
+                                </div>
+
+                                {% if produto.descricao %}
+                                    <p class="mt-2 mb-2 text-muted" style="font-size: 0.95rem;">
+                                        {{ produto.descricao|truncatechars:120 }}
+                                    </p>
+                                {% endif %}
+
+                                <div class="mt-2 fw-bold">
+                                    R$ {{ produto.preco }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto"
+                                   target="_blank"
+                                   href="https://wa.me/551120791922?text=Olá!%20Tenho%20interesse%20no%20produto:%20{{ produto.nome }}%20(R$%20{{ produto.preco }})">
+                                    Comprar
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-warning">
+                        Nenhum produto cadastrado ainda.
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="py-5 bg-light" id="contato">
+        <div class="container px-4 px-lg-5">
+            <h2 class="mb-4">Contato</h2>
+            <p class="mb-1"><strong>WhatsApp:</strong> (11) 2079-1922</p>
+            <p class="mb-1"><strong>Email:</strong> alpes@alpesuniformes.com.br</p>
+            <p class="mb-0"><strong>Endereço:</strong> Avenida Itaquera 8244, São Paulo - SP</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">© 2025 Alpes Uniformes</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS do template -->
+    <script src="{% static 'loja/js/scripts.js' %}"></script>
+
+    <!-- WhatsApp flutuante -->
+    <a href="https://wa.me/551120791922"
+       class="whatsapp-float"
+       target="_blank"
+       aria-label="WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+</body>
+</html>
