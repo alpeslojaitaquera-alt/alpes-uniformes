@@ -30,7 +30,14 @@ SECRET_KEY = 'django-insecure-b3srilu%c3pg3v7wur2&pag%6&ioof^(iy_mv%i+lr2k#y&j8t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "alpes-uniformes-2.onrender.com",
+    "alpesuniformes.com.br",
+    "www.alpesuniformes.com.br",
+    "127.0.0.1",
+    "localhost",
+]
+
 
 
 # Application definition
