@@ -34,9 +34,10 @@ ALLOWED_HOSTS = [
     "alpes-uniformes-2.onrender.com",
     "alpesuniformes.com.br",
     "www.alpesuniformes.com.br",
-    "127.0.0.1",
     "localhost",
+    "127.0.0.1",
 ]
+
 
 
 
